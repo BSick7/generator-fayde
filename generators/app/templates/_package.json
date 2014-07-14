@@ -1,0 +1,9 @@
+{
+    "name": "<%= _.slugify(_.humanize(appname)) %>",
+    "version": "0.1.0",
+    "main": "Gruntfile.js",
+    "devDependencies": {
+        "grunt": "~0.4.4",
+        "grunt-typescript": "~0.3.0"
+    }
+}

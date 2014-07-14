@@ -1,0 +1,13 @@
+{
+  "name": "generator-fayde",
+  "version": "0.1.0",
+  "description": "",
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": "Brad Sickles",
+  "license": "MIT",
+  "dependencies": {
+    "yeoman-generator": "^0.17.1"
+  }
+}
