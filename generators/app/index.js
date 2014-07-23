@@ -90,13 +90,13 @@ module.exports = yeoman.generators.Base.extend({
                 .then(function () {
                     if (_this.controlsModule)
                         return new Promise(function (fulfill, reject) {
-                            _this.bowerInstall(['git://github.com/BSick7/Fayde.Controls.git'], {saveDev: true}, fulfill);
+                            _this.bowerInstall(['fayde.controls'], {saveDev: true}, fulfill);
                         });
                 })
                 .then(function () {
                     if (_this.exjsModule)
                         return new Promise(function (fulfill, reject) {
-                            _this.bowerInstall(['git://github.com/BSick7/exjs.git'], {saveDev: true}, fulfill);
+                            _this.bowerInstall(['exjs'], {saveDev: true}, fulfill);
                         });
                 })
                 .then(done);

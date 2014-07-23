@@ -4,6 +4,6 @@
     "dependencies": {
         "requirejs": "*",
         "requirejs-text": "*",
-        "Fayde": "git://github.com/BSick7/Fayde.git"
+        "fayde": "*"
     }
 }
