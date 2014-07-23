@@ -9,5 +9,8 @@
   "license": "MIT",
   "dependencies": {
     "yeoman-generator": "^0.17.1"
+  },
+  "devDependencies": {
+    "promise": "^5.0.0"
   }
 }
