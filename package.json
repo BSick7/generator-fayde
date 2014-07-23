@@ -1,16 +1,18 @@
 {
   "name": "generator-fayde",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/BSick7/generator-fayde"
+  },
   "keywords": [
     "yeoman-generator"
   ],
   "author": "Brad Sickles",
   "license": "MIT",
   "dependencies": {
+    "promise": "^5.0.0",
     "yeoman-generator": "^0.17.1"
-  },
-  "devDependencies": {
-    "promise": "^5.0.0"
   }
 }
