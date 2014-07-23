@@ -1,7 +1,7 @@
 {
   "name": "generator-fayde",
   "version": "0.1.4",
-  "description": "",
+  "description": "Application generator for Fayde applications.",
   "repository": {
     "type": "git",
     "url": "git://github.com/BSick7/generator-fayde"
