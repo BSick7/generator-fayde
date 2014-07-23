@@ -1,4 +1,5 @@
-var yeoman = require('yeoman-generator');
+var yeoman = require('yeoman-generator'),
+    Promise = require('promise');
 
 module.exports = yeoman.generators.Base.extend({
     constructor: function () {
@@ -27,8 +28,13 @@ module.exports = yeoman.generators.Base.extend({
                     message: 'Which modules would you like to include?',
                     choices: [
                         {
+                            value: 'exjsModule',
+                            name: 'exjs',
+                            checked: true
+                        },
+                        {
                             value: 'controlsModule',
-                            name: 'Fayde-Controls',
+                            name: 'Fayde.Controls',
                             checked: true
                         }
                     ]
@@ -36,10 +42,8 @@ module.exports = yeoman.generators.Base.extend({
             ];
 
             this.prompt(prompts, function (props) {
-                var hasMod = function (mod) {
-                    return props.modules.indexOf(mod) !== -1;
-                };
-                this.controlsModule = hasMod('controlsModule');
+                this.exjsModule = props.modules.exjsModule;
+                this.controlsModule = props.modules.controlsModule;
                 done();
             }.bind(this));
         }
@@ -47,11 +51,7 @@ module.exports = yeoman.generators.Base.extend({
     configuring: {
         bowerSetup: function () {
             this.copy('_bowerrc', '.bowerrc');
-            if (this.controlsModule) {
-                this.copy('_bower.ex.json', 'bower.json');
-            } else {
-                this.copy('_bower.json', 'bower.json');
-            }
+            this.copy('_bower.json', 'bower.json');
         },
         gruntSetup: function () {
             this.copy('_package.json', 'package.json');
@@ -60,11 +60,16 @@ module.exports = yeoman.generators.Base.extend({
     },
     writing: {
         appFiles: function () {
-            if (this.controlsModule) {
-                this.copy('app/default.ex.html', 'app/default.html');
-            } else {
-                this.copy('app/default.html', 'app/default.html');
-            }
+            var context = {
+                exjs_lib: '',
+                controls_lib: ''
+            };
+            if (this.exjsModule)
+                context.exjs_lib = genScriptInclude('lib/exjs/dist/ex.min.js');
+            if (this.controlsModule)
+                context.controls_lib = genLibShim('Fayde.Controls', 'lib/Fayde.Controls/Fayde.Controls', 'Fayde.Controls');
+
+            this.template('app/_default.html', 'app/default.html', context);
             this.copy('app/default.fap', 'app/default.fap');
             this.copy('app/ViewModels/MainViewModel.ts', 'app/ViewModels/MainViewModel.ts');
         }
@@ -75,10 +80,42 @@ module.exports = yeoman.generators.Base.extend({
             this.npmInstall(['typescript'], { 'saveDev': true }, done);
         },
         bower: function () {
-            this.bowerInstall();
+            var _this = this;
+
+            var done = this.async();
+            var promise = new Promise(function (fulfill, reject) {
+                _this.bowerInstall([], fulfill);
+            });
+            promise
+                .then(function () {
+                    if (_this.controlsModule)
+                        return new Promise(function (fulfill, reject) {
+                            _this.bowerInstall(['git://github.com/BSick7/Fayde.Controls.git'], {saveDev: true}, fulfill);
+                        });
+                })
+                .then(function () {
+                    if (_this.exjsModule)
+                        return new Promise(function (fulfill, reject) {
+                            _this.bowerInstall(['git://github.com/BSick7/exjs.git'], {saveDev: true}, fulfill);
+                        });
+                })
+                .then(done);
         },
         grunt: function () {
             this.npmInstall();
         }
     }
 });
+
+function genScriptInclude(src) {
+    return '<script src="' + src + '"></script>\
+    ';
+}
+function genLibShim(libName, libPath, exports) {
+    return '\
+    <script data-lib="' + libName + '">\
+        require.shim["' + libPath + '"] = {\
+            exports: "' + exports + '"\
+        };\
+    </script>';
+}
