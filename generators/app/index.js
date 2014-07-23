@@ -80,26 +80,13 @@ module.exports = yeoman.generators.Base.extend({
             this.npmInstall(['typescript'], { 'saveDev': true }, done);
         },
         bower: function () {
-            var _this = this;
-
             var done = this.async();
-            var promise = new Promise(function (fulfill, reject) {
-                _this.bowerInstall([], fulfill);
-            });
-            promise
-                .then(function () {
-                    if (_this.controlsModule)
-                        return new Promise(function (fulfill, reject) {
-                            _this.bowerInstall(['fayde.controls'], {saveDev: true}, fulfill);
-                        });
-                })
-                .then(function () {
-                    if (_this.exjsModule)
-                        return new Promise(function (fulfill, reject) {
-                            _this.bowerInstall(['exjs'], {saveDev: true}, fulfill);
-                        });
-                })
-                .then(done);
+            var deps = [];
+            if (this.controlsModule)
+                deps.push('fayde.controls');
+            if (this.exjsModule)
+                deps.push('exjs');
+            this.bowerInstall(deps, { save: true }, done);
         },
         grunt: function () {
             this.npmInstall();
