@@ -42,8 +42,11 @@ module.exports = yeoman.generators.Base.extend({
             ];
 
             this.prompt(prompts, function (props) {
-                this.exjsModule = props.modules.exjsModule;
-                this.controlsModule = props.modules.controlsModule;
+                var hasMod = function (mod) {
+                    return props.modules.indexOf(mod) !== -1;
+                };
+                this.controlsModule = hasMod('controlsModule');
+                this.exjsModule = hasMod('exjsModule');
                 done();
             }.bind(this));
         }
