@@ -10,5 +10,6 @@
             <vms:MainViewModel/>
         </Grid.DataContext>
 
+        <TextBlock Text="Welcome to Fayde!" />
     </Grid>
 </Application>
