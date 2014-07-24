@@ -73,6 +73,7 @@ module.exports = yeoman.generators.Base.extend({
                 context.controls_lib = genLibShim('Fayde.Controls', 'lib/Fayde.Controls/Fayde.Controls', 'Fayde.Controls');
 
             this.template('app/_default.html', 'app/default.html', context);
+            this.copy('app/require-config.js', 'app/require-config.js');
             this.copy('app/default.fap', 'app/default.fap');
             this.copy('app/ViewModels/MainViewModel.ts', 'app/ViewModels/MainViewModel.ts');
         }
