@@ -4,7 +4,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         typescript: {
             build: {
-                src: ['app/**/*.ts'],
+                src: ['app/**/*.ts', '!app/lib/**/*.ts'],
                 options: {
                     module: 'amd',
                     target: 'es5',
