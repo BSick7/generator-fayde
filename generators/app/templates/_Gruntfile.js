@@ -37,7 +37,10 @@ module.exports = function (grunt) {
         watch: {
             src: {
                 files: ['app/**/*.ts'],
-                tasks: ['typescript:build']
+                tasks: ['typescript:build'],
+                options: {
+                    livereload: ports.livereload
+                }
             },
             views: {
                 files: ['app/**/*.fap', 'app/**/*.fayde'],
