@@ -35,6 +35,6 @@ Issue the following command to create a page called "Home" with a Title of "Page
 
 ### Generate View
 
-Issue the following command to create a XAML view called "Testing".  Generator will prompt for root UIElement to use.
+Issue the following command to create a XAML view called "Testing".  Generator will prompt for root UIElement to use and place in the Views directory.
 
 ```yo fayde:view Testing```
