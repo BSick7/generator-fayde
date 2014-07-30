@@ -14,6 +14,7 @@ module.exports = yeoman.generators.Base.extend({
                 message: 'Your project name',
                 default: this.appname // Default to current folder name
             }, function (answers) {
+                this.name = answers.name;
                 this.log(answers.name);
                 done();
             }.bind(this));
