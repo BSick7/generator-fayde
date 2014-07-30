@@ -59,21 +59,28 @@ module.exports = yeoman.generators.Base.extend({
         gruntSetup: function () {
             this.copy('_package.json', 'package.json');
             this.copy('_Gruntfile.js', 'Gruntfile.js');
+        },
+        faydeSetup: function () {
+            var config = this.src.readJSON('app/fayde.json');
+            if (this.exjsModule) {
+                config.libs["exjs"] = {
+                    "path": "lib/exjs/dist/ex.min",
+                    "exports": "exjs"
+                };
+            }
+            if (this.controlsModule) {
+                config.libs["Fayde.Controls"] = {
+                    "exports": "Fayde.Controls"
+                };
+            }
+
+            this.dest.write('app/fayde.json', JSON.stringify(config, undefined, 2));
         }
     },
     writing: {
         appFiles: function () {
-            var context = {
-                exjs_lib: '',
-                controls_lib: ''
-            };
-            if (this.exjsModule)
-                context.exjs_lib = genScriptInclude('lib/exjs/dist/ex.min.js');
-            if (this.controlsModule)
-                context.controls_lib = genLibShim('Fayde.Controls', 'lib/Fayde.Controls/Fayde.Controls', 'Fayde.Controls');
-
-            this.template('app/_default.html', 'app/default.html', context);
             this.copy('app/require-config.js', 'app/require-config.js');
+            this.copy('app/default.html', 'app/default.html');
             this.copy('app/default.fap', 'app/default.fap');
             this.copy('app/ViewModels/MainViewModel.ts', 'app/ViewModels/MainViewModel.ts');
         }
@@ -97,16 +104,3 @@ module.exports = yeoman.generators.Base.extend({
         }
     }
 });
-
-function genScriptInclude(src) {
-    return '<script src="' + src + '"></script>\
-    ';
-}
-function genLibShim(libName, libPath, exports) {
-    return '\
-    <script data-lib="' + libName + '">\
-        require.shim["' + libPath + '"] = {\
-            exports: "' + exports + '"\
-        };\
-    </script>';
-}
