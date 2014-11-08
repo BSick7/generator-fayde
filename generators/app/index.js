@@ -1,5 +1,7 @@
 var yeoman = require('yeoman-generator'),
-    Promise = require('promise');
+    Promise = require('promise'),
+    controls_version = "~0.13.0",
+    exjs_version = "*";
 
 module.exports = yeoman.generators.Base.extend({
     constructor: function () {
@@ -80,7 +82,6 @@ module.exports = yeoman.generators.Base.extend({
     },
     writing: {
         appFiles: function () {
-            this.copy('app/require-config.js', 'app/require-config.js');
             this.copy('app/default.html', 'app/default.html');
             this.copy('app/default.fap', 'app/default.fap');
             this.copy('app/ViewModels/MainViewModel.ts', 'app/ViewModels/MainViewModel.ts');
@@ -95,9 +96,9 @@ module.exports = yeoman.generators.Base.extend({
             var done = this.async();
             var deps = [];
             if (this.controlsModule)
-                deps.push('fayde.controls');
+                deps.push('fayde.controls#' + controls_version);
             if (this.exjsModule)
-                deps.push('exjs');
+                deps.push('exjs#' + exjs_version);
             this.bowerInstall(deps, { save: true }, done);
         },
         grunt: function () {
