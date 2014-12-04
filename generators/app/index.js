@@ -1,6 +1,6 @@
 var yeoman = require('yeoman-generator'),
     Promise = require('promise'),
-    controls_version = "~0.13.0",
+    controls_version = "~0.14.0",
     exjs_version = "*";
 
 module.exports = yeoman.generators.Base.extend({
@@ -70,6 +70,7 @@ module.exports = yeoman.generators.Base.extend({
                     "path": "lib/exjs/dist/ex.min",
                     "exports": "exjs"
                 };
+                config.themes["exjs"] = "none";
             }
             if (this.controlsModule) {
                 config.libs["Fayde.Controls"] = {
