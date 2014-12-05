@@ -89,10 +89,6 @@ module.exports = yeoman.generators.Base.extend({
         }
     },
     install: {
-        typescript: function () {
-            var done = this.async();
-            this.npmInstall(['typescript'], { 'saveDev': true }, done);
-        },
         bower: function () {
             var done = this.async();
             var deps = [];
