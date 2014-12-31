@@ -1,6 +1,6 @@
 var yeoman = require('yeoman-generator'),
     Promise = require('promise'),
-    controls_version = "~0.15.0",
+    controls_version = "~0.16.0",
     exjs_version = "*";
 
 module.exports = yeoman.generators.Base.extend({
