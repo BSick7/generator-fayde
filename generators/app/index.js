@@ -1,5 +1,6 @@
 var yeoman = require('yeoman-generator'),
     Promise = require('promise'),
+    unify = require('fayde-unify'),
     controls_version = "~0.16.0",
     exjs_version = "*";
 
@@ -62,23 +63,6 @@ module.exports = yeoman.generators.Base.extend({
         gruntSetup: function () {
             this.copy('_package.json', 'package.json');
             this.copy('_Gruntfile.js', 'Gruntfile.js');
-        },
-        faydeSetup: function () {
-            var config = this.src.readJSON('app/fayde.json');
-            if (this.exjsModule) {
-                config.libs["exjs"] = {
-                    "path": "lib/exjs/dist/ex.min",
-                    "exports": "exjs"
-                };
-                config.themes["exjs"] = "none";
-            }
-            if (this.controlsModule) {
-                config.libs["Fayde.Controls"] = {
-                    "exports": "Fayde.Controls"
-                };
-            }
-
-            this.dest.write('app/fayde.json', JSON.stringify(config, undefined, 2));
         }
     },
     writing: {
@@ -89,14 +73,22 @@ module.exports = yeoman.generators.Base.extend({
         }
     },
     install: {
-        bower: function () {
+        unify: function () {
             var done = this.async();
-            var deps = [];
-            if (this.controlsModule)
-                deps.push('fayde.controls#' + controls_version);
+            unify.commands.init({
+                name: this.name,
+                client: ['app/fayde.json'],
+                type: 'app'
+            }, done);
+        },
+        fayde: function () {
+            var done = this.async();
+            var libs = [];
             if (this.exjsModule)
-                deps.push('exjs#' + exjs_version);
-            this.bowerInstall(deps, { save: true }, done);
+                libs.push('exjs#' + exjs_version);
+            if (this.controlsModule)
+                libs.push('fayde.controls#' + controls_version);
+            unify.commands.install({libs: libs, options: {save: true}}, done);
         },
         grunt: function () {
             this.npmInstall();
