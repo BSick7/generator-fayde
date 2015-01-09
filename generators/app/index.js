@@ -77,7 +77,7 @@ module.exports = yeoman.generators.Base.extend({
             var done = this.async();
             unify.commands.init({
                 name: this.name,
-                client: ['app/fayde.json'],
+                tests: ['app/fayde.json'],
                 type: 'app'
             }, done);
         },

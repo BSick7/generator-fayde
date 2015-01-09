@@ -1,6 +1,6 @@
 {
   "name": "generator-fayde",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Application generator for Fayde applications.",
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
   "author": "Brad Sickles",
   "license": "MIT",
   "dependencies": {
-    "fayde-unify": "~0.1.6",
+    "fayde-unify": "~0.3.1",
     "promise": "^5.0.0",
     "yeoman-generator": "^0.17.1"
   }
