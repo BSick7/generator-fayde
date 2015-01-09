@@ -1,6 +1,6 @@
 {
   "name": "generator-fayde",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Application generator for Fayde applications.",
   "repository": {
     "type": "git",
