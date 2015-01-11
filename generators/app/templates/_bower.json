@@ -1,7 +1,4 @@
 {
   "name": "<%= name %>",
-  "version": "0.1.0",
-  "dependencies": {
-    "fayde": "~0.16.0"
-  }
+  "version": "0.1.0"
 }

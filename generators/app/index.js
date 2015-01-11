@@ -81,14 +81,18 @@ module.exports = yeoman.generators.Base.extend({
                 type: 'app'
             }, done);
         },
-        fayde: function () {
+        unifyBower: function () {
             var done = this.async();
-            var libs = [];
+            unify.commands.bower({}, done);
+        },
+        bower: function () {
+            var done = this.async();
+            var libs = ['fayde'];
             if (this.exjsModule)
                 libs.push('exjs#' + exjs_version);
             if (this.controlsModule)
                 libs.push('fayde.controls#' + controls_version);
-            unify.commands.install({libs: libs, options: {save: true}}, done);
+            this.bowerInstall(libs, {save: true}, done);
         },
         grunt: function () {
             this.npmInstall();
