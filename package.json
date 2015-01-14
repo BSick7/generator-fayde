@@ -1,15 +1,17 @@
 {
   "name": "generator-fayde",
   "version": "0.6.0",
-  "description": "Application generator for Fayde applications.",
+  "description": "Yeoman generator for Fayde Applications.",
   "repository": {
     "type": "git",
-    "url": "git://github.com/BSick7/generator-fayde"
+    "url": "git://github.com/wsick/generator-fayde"
   },
   "keywords": [
     "yeoman-generator"
   ],
-  "author": "Brad Sickles",
+  "authors": [
+    "BSick7 <brad.sickles@gmail.com>"
+  ],
   "license": "MIT",
   "dependencies": {
     "fayde-unify": "~0.4.0",
