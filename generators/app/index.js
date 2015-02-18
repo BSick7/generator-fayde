@@ -1,7 +1,7 @@
 var yeoman = require('yeoman-generator'),
     Promise = require('promise'),
     unify = require('fayde-unify'),
-    controls_version = "~0.16.0",
+    controls_version = "~0.17.0",
     exjs_version = "*";
 
 module.exports = yeoman.generators.Base.extend({
