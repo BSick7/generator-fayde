@@ -1,7 +1,7 @@
 var yeoman = require('yeoman-generator'),
     Promise = require('promise'),
     unify = require('fayde-unify'),
-    controls_version = "~0.17.0",
+    controls_version = "^0.17.0",
     exjs_version = "*";
 
 module.exports = yeoman.generators.Base.extend({
@@ -38,7 +38,7 @@ module.exports = yeoman.generators.Base.extend({
                         },
                         {
                             value: 'controlsModule',
-                            name: 'Fayde.Controls',
+                            name: 'fayde.controls',
                             checked: true
                         }
                     ]
