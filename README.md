@@ -16,7 +16,7 @@ $ cd <new directory>
 $ yo fayde
 
 # Launch
-$ grunt serve
+$ gulp serve
 ```
 
 ### Generate View Model
