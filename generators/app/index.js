@@ -60,14 +60,15 @@ module.exports = yeoman.generators.Base.extend({
             this.copy('_bowerrc', '.bowerrc');
             this.copy('_bower.json', 'bower.json');
         },
-        gruntSetup: function () {
+        gulpSetup: function () {
             this.copy('_package.json', 'package.json');
-            this.copy('_Gruntfile.js', 'Gruntfile.js');
+            this.directory('gulp', 'gulp');
+            this.copy('_gulpfile.js', 'gulpfile.js');
         }
     },
     writing: {
         appFiles: function () {
-            this.copy('app/default.html', 'app/default.html');
+            this.copy('app/index.html', 'app/index.html');
             this.copy('app/default.fap', 'app/default.fap');
             this.copy('app/ViewModels/MainViewModel.ts', 'app/ViewModels/MainViewModel.ts');
         }
