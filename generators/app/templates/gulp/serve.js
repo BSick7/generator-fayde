@@ -18,8 +18,8 @@ module.exports = function (meta) {
 
         var distpaths = [
             'app/.build/**/*',
-            'app/**/*.fap',
-            'app/**/*.fayde'
+            'app/!(lib)/*.fap',
+            'app/!(lib)/*.fayde'
         ];
         gulp.watch(distpaths, function () {
             gulp.src(distpaths).pipe(connect.reload());
